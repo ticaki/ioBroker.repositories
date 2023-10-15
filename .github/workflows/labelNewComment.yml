@@ -1,0 +1,17 @@
+# This workflow will triage pull requests and apply a label based on the
+# paths that are modified in the pull request.
+
+name: new pull request comment
+
+on:
+  issue_comment:                                     
+    types: [created, edited]
+
+jobs:
+  setLabels:
+    if: contains(github.event.comment.html_url, '/pull/')    # check if the comments come from pull request, exclude those from issue.
+
+    runs-on: [ubuntu-latest]
+
+    steps:
+    - run: echo new comment by ${(github.event.comment.actor.name}
